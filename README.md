@@ -176,6 +176,7 @@ func updateDistanceMatrix(deltaPheromones [][]float64, path []int, L float64) {
 <summary>Испарение феромона</summary>
 
 ```
+// Испарение феромона
 func evaporatePheromones(pheromones [][]float64, p float64) {
 	for i := range pheromones {
 		for j := range pheromones[i] {

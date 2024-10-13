@@ -73,9 +73,9 @@ func calculateProbabilities(pheromones [][]float64, distanceMatrix [][]int, curr
 }
 
 // Выбор направления
-// selectNextCity принимает вероятности которые расчитываются calculateProbabilities
+// selectNextVertex принимает вероятности которые расчитываются calculateProbabilities
 // и возвращает номер выбранной вершины, используя метод рулетки
-func selectNextCity(probabilities []float64) int {
+func selectNextVertex(probabilities []float64) int {
 	sm := 0.0                                  // сумма всех вероятностей
 	beg := make([]float64, len(probabilities)) // начальные границы интервалов вероятностей для каждого города
 	end := make([]float64, len(probabilities)) // конечные границы интервалов вероятностей для каждого города
@@ -134,8 +134,8 @@ func calculatePathLength(path []int, distanceMatrix [][]int) float64 {
 	return L
 }
 
-// updateDistanceMatrix помечает дуги феромоном
-func updateDistanceMatrix(deltaPheromones [][]float64, path []int, L float64) {
+// updateDeltaPheromones помечает дуги феромоном
+func updateDeltaPheromones(deltaPheromones [][]float64, path []int, L float64) {
 	for i := 0; i < len(path)-1; i++ {
 		from := path[i]
 		to := path[i+1]
@@ -174,7 +174,7 @@ func SolveTravelingSalesmanProblem(graph *s21_graph.Graph) (TsmResult, error) {
 
 			for len(path) < n { // Цикл пострения пути
 				probabilities := calculateProbabilities(pheromones, distanceMatrix, currentCity, visited) // Каждой вершине - свой вес
-				nextCity := selectNextCity(probabilities)                                                 // Выбор направления
+				nextCity := selectNextVertex(probabilities)                                                 // Выбор направления
 				visited[nextCity] = true                                                                  // Tabu list увеличился
 				path = append(path, nextCity)
 				currentCity = nextCity // Начало дуги = конец предыдущей
@@ -191,7 +191,7 @@ func SolveTravelingSalesmanProblem(graph *s21_graph.Graph) (TsmResult, error) {
 			}
 
 			// Пометка дуг феромоном
-			updateDistanceMatrix(deltaPheromones, path, L)
+			updateDeltaPheromones(deltaPheromones, path, L)
 		}
 
 		evaporatePheromones(pheromones, p)           // Испарение феромона

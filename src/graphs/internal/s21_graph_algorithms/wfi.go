@@ -1,13 +1,13 @@
-package graph_algorithms
+package s21_graph_algorithms
 
 import (
 	"math"
 
-	"graphs/internal/graph"
+	"graphs/internal/s21_graph"
 )
 
-// алгоритм Флойда-Уоршелла
-func FloydWarshall(graph *graph.Graph) [][]int {
+// GetShortestPathsBetweenAllVertices - алгоритм Флойда-Уоршелла (FloydWarshall)
+func GetShortestPathsBetweenAllVertices(graph *s21_graph.Graph) [][]int {
 	// Количество вершин в графе
 	vertexCount := graph.GraphLength()
 

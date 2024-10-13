@@ -1,14 +1,14 @@
-package graph_algorithms
+package s21_graph_algorithms
 
 import (
 	"container/list"
 	"fmt"
 
-	"graphs/internal/graph"
+	"graphs/internal/s21_graph"
 )
 
-// DFS выполняет поиск в глубину
-func DFS(graph *graph.Graph, startVertex int) []int {
+// DepthFirstSearch выполняет поиск в глубину
+func DepthFirstSearch(graph *s21_graph.Graph, startVertex int) []int {
 	vertexCount := graph.GraphLength()
 	if vertexCount == 0 || startVertex >= vertexCount {
 		return []int{}
@@ -31,7 +31,6 @@ func DFS(graph *graph.Graph, startVertex int) []int {
 		isFound := false
 
 		for to := 0; to < vertexCount; to++ {
-			fmt.Printf("graph.adjacencyMatrix[from][to] %d | %d %d\n", graph.GetValue(from, to), from, to)
 			if !visited[to] && graph.GetValue(from, to) > 0 {
 				from = to
 				isFound = true

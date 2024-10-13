@@ -1,8 +1,8 @@
 package graph_algorithms_test
 
 import (
-	"graphs/internal/graph"
-	"graphs/internal/graph_algorithms"
+	"graphs/internal/s21_graph"
+	"graphs/internal/s21_graph_algorithms"
 	"math"
 	"testing"
 )
@@ -55,12 +55,12 @@ func TestFloydWarshall(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			g := graph.NewGraph(tt.vertexCount)
+			g := s21_graph.NewGraph(tt.vertexCount)
 			for _, edge := range tt.edges {
 				g.AddEdge(edge[0], edge[1], edge[2])
 			}
 
-			result := graph_algorithms.FloydWarshall(g)
+			result := s21_graph_algorithms.GetShortestPathsBetweenAllVertices(g)
 
 			if !equal2D(result, tt.expectedDist) {
 				t.Errorf("Expected %v, but got %v", tt.expectedDist, result)

@@ -1,6 +1,9 @@
-package graph
+package s21_graph
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 // Graph представляет граф с матрицей смежности
 type Graph struct {
@@ -31,8 +34,21 @@ func (g *Graph) GetAdjacencyMatrix() [][]int {
 }
 
 // SetAdjacencyMatrix устанавливает матрицу смежности
-func (g *Graph) SetAdjacencyMatrix(matrix [][]int) {
+func (g *Graph) SetAdjacencyMatrix(matrix [][]int) error {
+	// Проверка на инициализацию массива
+	if len(matrix) == 0 {
+		return errors.New("матрица смежности не может быть пустой")
+	}
+
+	// Проверка на равенство размеров строк
+	for _, row := range matrix {
+		if len(row) != len(matrix) {
+			return errors.New("матрица смежности должна быть квадратной")
+		}
+	}
+
 	g.adjacencyMatrix = matrix
+	return nil
 }
 
 // GraphLength возвращает длину adjacencyMatrix

@@ -1,10 +1,11 @@
-package graph_algorithms
+package s21_graph_algorithms
 
 import (
+	"errors"
 	"math"
 	"math/rand"
 
-	"graphs/internal/graph"
+	"graphs/internal/s21_graph"
 )
 
 const (
@@ -148,10 +149,15 @@ type TsmResult struct {
 }
 
 // SolveTravelingSalesmanProblem решает задачу коммивояжера с использованием муравьиного алгоритма
-func SolveTravelingSalesmanProblem(graph *graph.Graph) TsmResult {
+func SolveTravelingSalesmanProblem(graph *s21_graph.Graph) (TsmResult, error) {
 	distanceMatrix := graph.GetAdjacencyMatrix()
 	n = len(distanceMatrix)
 	Q = 5 * float64(n)
+
+	if n < 3 {
+		return TsmResult{}, errors.New("недостаточно вершин для решения задачи коммивояжера")
+	}
+
 	// Координаты вершин
 	pheromones := initPheromones()           // Wt След
 	deltaPheromones := initDeltaPheromones() // DWt Матрица приращений следа
@@ -192,8 +198,12 @@ func SolveTravelingSalesmanProblem(graph *graph.Graph) TsmResult {
 		addNewTrails(pheromones, deltaPheromones, p) // Добавление новых следов
 	}
 
+	if len(bestPath) == 0 {
+		return TsmResult{}, errors.New("не удалось найти решение задачи коммивояжера")
+	}
+
 	return TsmResult{
 		Vertices: bestPath,
 		Distance: Lmin,
-	}
+	}, nil
 }

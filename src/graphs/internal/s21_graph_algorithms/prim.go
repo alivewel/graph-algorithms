@@ -1,4 +1,4 @@
-package graph_algorithms
+package s21_graph_algorithms
 
 import (
 	"container/heap"
@@ -6,12 +6,12 @@ import (
 	"math/rand"
 	"time"
 
-	"graphs/internal/graph"
+	"graphs/internal/s21_graph"
 	"graphs/internal/priorityqueue"
 )
 
-// Prim реализует алгоритм Прима
-func Prim(graph *graph.Graph) (adjacencyMatrix [][]int) {
+// GetLeastSpanningTree (Prim) реализует алгоритм Прима
+func GetLeastSpanningTree(graph *s21_graph.Graph) (adjacencyMatrix [][]int) {
 	n := graph.GraphLength()
 	visited := make([]bool, n)
 	pq := &priorityqueue.PriorityQueue{}

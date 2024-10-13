@@ -1,8 +1,8 @@
 package graph_algorithms_test
 
 import (
-	"graphs/internal/graph"
-	"graphs/internal/graph_algorithms"
+	"graphs/internal/s21_graph"
+	"graphs/internal/s21_graph_algorithms"
 	"testing"
 )
 
@@ -49,12 +49,12 @@ func TestBFS(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			g := graph.NewGraph(4)
+			g := s21_graph.NewGraph(4)
 			for _, edge := range tt.edges {
 				g.AddEdge(edge[0], edge[1], edge[2])
 			}
 
-			result := graph_algorithms.BFS(g, tt.startVertex)
+			result := s21_graph_algorithms.BreadthFirstSearch(g, tt.startVertex)
 
 			if !equal(result, tt.expectedOrder) {
 				t.Errorf("Expected %v, but got %v", tt.expectedOrder, result)

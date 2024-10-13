@@ -1,14 +1,14 @@
-package graph_algorithms
+package s21_graph_algorithms
 
 import (
 	"container/list"
 	"fmt"
 
-	"graphs/internal/graph"
+	"graphs/internal/s21_graph"
 )
 
-// BFS выполняет поиск в ширину
-func BFS(graph *graph.Graph, startVertex int) []int {
+// BreadthFirstSearch выполняет поиск в ширину
+func BreadthFirstSearch(graph *s21_graph.Graph, startVertex int) []int {
 	vertexCount := graph.GraphLength()
 	if vertexCount == 0 || startVertex >= vertexCount {
 		return []int{}
